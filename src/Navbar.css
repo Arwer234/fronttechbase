@@ -1,0 +1,16 @@
+#navbar{
+    background-color: #333333;
+    color:white;
+    
+}
+#navbar > ul{
+    list-style-type: none;
+    display: flex;
+}
+#navbar > ul > li{
+    margin-right: 20px;
+}
+#navbar > ul > li > a{
+    color:white;
+    text-decoration: none;
+}

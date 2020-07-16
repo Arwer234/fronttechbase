@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { PureComponent } from 'react'
+import "./App.css"
+import Header from "./Header"
+import Navbar from "./Navbar"
+import TopicList from "./TopicList"
+import Article from "./Article"
+import Footer from "./Footer"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      
+    }
+  }
+
+  render() {
+    return (
+      <div className = "root">
+        <Header/>
+        <Navbar/>
+        <div className = "main">
+          <TopicList/>
+          <div className="right">
+            <Article/>
+          </div>
+        </div>
+        <Footer/>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
