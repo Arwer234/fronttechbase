@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
 import "./App.css"
-import Header from "./Header"
-import Navbar from "./Navbar"
-import TopicList from "./TopicList"
-import Article from "./Article"
-import Footer from "./Footer"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Main from "./Main"
+import Admin from "./Admin"
 
 class App extends PureComponent {
   constructor(props) {
@@ -17,17 +15,10 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div className = "root">
-        <Header/>
-        <Navbar/>
-        <div className = "main">
-          <TopicList/>
-          <div className="right">
-            <Article/>
-          </div>
-        </div>
-        <Footer/>
-      </div>
+      <Router>
+        <Route exact path="/" component={Main}/>
+        <Route path="/admin" component={Admin}/>
+      </Router>
     )
   }
 }

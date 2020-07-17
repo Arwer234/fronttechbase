@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import SearchBar from "./SearchBar"
 import "./Header.css"
+import LoginPopup from "./LoginPopup"
+
 
 class Header extends PureComponent {
     constructor(props) {
@@ -14,9 +16,10 @@ class Header extends PureComponent {
     render() {
         return (
             <div className = "header">
-                <img src = "" alt = ""/>
                 <h1>Front Base App</h1>
                 <SearchBar/>
+                <a href="/admin"> admin</a>
+                <LoginPopup/>
             </div>
         )
     }

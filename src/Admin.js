@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import "./Article.css"
+import Header from "./Header"
 
-class Article extends PureComponent {
+class Admin extends PureComponent {
     constructor(props) {
         super(props)
-
 
         this.state = {
             
@@ -13,11 +12,11 @@ class Article extends PureComponent {
 
     render() {
         return (
-            <div className="article">
-                Artykuł
+            <div>
+                <Header/>
             </div>
         )
     }
 }
 
-export default Article
+export default Admin

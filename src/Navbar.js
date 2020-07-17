@@ -15,10 +15,16 @@ class Navbar extends PureComponent {
             <div id="navbar">
                 <ul>
                     <li>
-                        <a href="#navbar">click 1</a>
+                        <a href="#navbar">JavaScript</a>
                     </li>
                     <li>
-                        <a href="#navbar">click 2</a>
+                        <a href="#navbar">CSS</a>
+                    </li>
+                    <li>
+                        <a href="#navbar">React</a>
+                    </li>
+                    <li>
+                        <a href="#navbar">React Native</a>
                     </li>
                 </ul>
             </div>
