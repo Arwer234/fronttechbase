@@ -4,7 +4,7 @@ import "./BigButton.css"
 export default class BigButton extends Component {
   render() {
     return (
-      <div className = "big-button">
+      <div className = "big-button" onClick={this.props.onClick}>
           {this.props.text}
       </div>
     );

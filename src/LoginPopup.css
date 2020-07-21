@@ -29,6 +29,12 @@
     text-align: center;
 }
 
+.inputs > input{
+    width:250px;
+    height: 2rem;
+    margin-top:10px;
+}
+
 .inputs{
     padding:5px;
     margin:40px 10px;

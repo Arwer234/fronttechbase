@@ -16,31 +16,7 @@ class Main extends PureComponent {
     }
   }
   componentDidMount = ()=>{
-    console.log("did Mount")
-    const obj = {
-      name:"JavaScript"
-    }
-    console.log(obj)
-    fetch('http://localhost:3001/getTopicData',{
-        method: "POST",
-        mode:"cors",
-        body: JSON.stringify({name:"JavaScript"}),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }).then(
-    	(response) => (response.json())
-       ).then((response)=>{
-         console.log(response)
-         this.setState({
-           topicData:response
-         })
-      if (response.status === 'success'){
-        alert("Message Sent."); 
-      }else if(response.status === 'fail'){
-        alert("Message failed to send.")
-      }
-    })
+    
   }
   render() {
     return (
