@@ -4,17 +4,12 @@ import "./Article.css"
 class Article extends PureComponent {
     constructor(props) {
         super(props)
-
-
-        this.state = {
-            
-        }
     }
 
     render() {
         return (
             <div className="article">
-                Artykuł
+                {this.props.text}
             </div>
         )
     }

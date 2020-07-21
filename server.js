@@ -21,23 +21,16 @@ var connection = mysql.createConnection({
 app.post('/getTopicData',function(req,res){ 
     console.log(req.body)
 
-    connection.connect(function(err){
-        connection.query(`SELECT * from topics WHERE belongs_to = '${req.body.name}'`, function (err, rows, fields) {
-            if (err) throw err
-    
-            //console.log('The solution is: ', rows[0])
-            // for(let i = 0;i<rows.length;i++){
-                
-    
-            //     console.log(rows[i],rows[i].belongs_to)
-            //     if(rows[i].belongs_to==req.body.name){
-            //         res.send(JSON.stringify(rows[i]))
-                    
-            //     }
-            // }
-    
-            res.send(JSON.stringify(rows))
-        })
+    connection.query(`SELECT * from topics WHERE topics.belongs_to='${req.body.name}'`, function (err, rows, fields) {
+        if (err) throw err
+        else {
+            let dataToSend = []
+            for (let i = 0; i < rows.length; i++) {
+                dataToSend.push(rows[i])
+            }
+            res.send(JSON.stringify(dataToSend))
+        }
+
     })
 })
 

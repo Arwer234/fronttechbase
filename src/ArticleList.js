@@ -6,21 +6,24 @@ class ArticleList extends PureComponent {
     constructor(props) {
         super(props)
 
-        var articles = []
-        for (let i = 0; i < 4; i++) {
-            articles.push(<Article key = {i}/>);
+        // var articles = []
+        // for (let i = 0; i < 4; i++) {
+        //     articles.push(<Article key = {i}/>);
             
-        }
+        // }
 
-        this.state = {
-            articles:articles
-        }
+        // this.state = {
+        //     articles:articles
+        // }
     }
 
     render() {
+        let articleTab = this.props.topicData.map((item)=>{
+            return <Article key = {item.id} text = {item.content} />
+        })
         return (
             <div className="article-list">
-                {this.state.articles}
+                {articleTab}
             </div>
         )
     }

@@ -12,26 +12,46 @@ class Main extends PureComponent {
     super(props)
 
     this.state = {
-      topicData:{}
+      topicData: []
     }
+    this.fetchArticleData = this.fetchArticleData.bind(this)
   }
-  componentDidMount = ()=>{
-    
+  componentDidMount = () => {
+    this.fetchArticleData({ target: { innerHTML: "JavaScript" } })
   }
+
+  async fetchArticleData(item) {
+    const whichToFetch = item.target.innerHTML
+    await fetch('http://localhost:3001/getTopicData', {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify({ name: whichToFetch }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(
+      (response) => (response.json())
+    ).then((response) => {
+      this.setState({
+        topicData: response
+      })
+    })
+  }
+
   render() {
     return (
-        <div className = "root">
-            <Header/>
-            <Navbar/>
-            <div className = "main">
-            <TopicList data = {this.state.topicData}/>
-            <div className="right">
+      <div className="root">
+        <Header />
+        <Navbar fetchArticleData={this.fetchArticleData} />
+        <div className="main">
+          <TopicList changeArticle={this.changeArticle} data={this.state.topicData} />
+          <div className="right">
 
-                <ArticleList/>
-            </div>
-            </div>
-            <Footer/>
+            <ArticleList topicData={this.state.topicData} />
+          </div>
         </div>
+        <Footer />
+      </div>
     )
   }
 }
