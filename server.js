@@ -50,7 +50,7 @@ app.post("/register",function(req,res){
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt)
     console.log(username,salt,hash)
-
+    //alibaba
     //connection.end()
 })
 

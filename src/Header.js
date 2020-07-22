@@ -14,7 +14,7 @@ class Header extends PureComponent {
         }
     }
 
-    popupClick= ()=>{
+    popupClick= () => {
 
         //if !sessionAdmin==false
 
@@ -27,8 +27,7 @@ class Header extends PureComponent {
         return (
             <div className = "header">
                 <h1>Front Base App</h1>
-                <SearchBar/>
-                <button onClick={this.popupClick}>Admin</button>
+                <img src = "s" onClick={this.popupClick}/>
                 {this.state.showPopup? <LoginPopup popupClick={this.popupClick}/>:null}
                 
             </div>

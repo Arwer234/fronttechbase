@@ -12,16 +12,36 @@ class Main extends PureComponent {
     super(props)
 
     this.state = {
-      topicData: []
+      topicData: [],
+      clickedArticle:false,
+      chosenArticle:""
     }
     this.fetchArticleData = this.fetchArticleData.bind(this)
   }
   componentDidMount = () => {
-    this.fetchArticleData({ target: { innerHTML: "JavaScript" } })
+    //this.fetchArticleData({ target: { innerHTML: "JavaScript" } })
   }
-
+  changeArticle = (item) => {
+    this.resetArticleList()
+    console.log(item.target.innerHTML)
+    if(!this.state.clickedArticle)
+    {
+      this.setState({
+        clickedArticle:true,
+        chosenArticle:item.target.innerHTML
+      })
+    }
+  }
+  resetArticleList = () =>{
+    console.log(this.state.chosenArticle,this.state.clickedArticle)
+    this.setState({
+      clickedArticle:false,
+      chosenArticle:""
+    })
+  }
   async fetchArticleData(item) {
     const whichToFetch = item.target.innerHTML
+    this.resetArticleList()
     await fetch('http://localhost:3001/getTopicData', {
       method: "POST",
       mode: "cors",
@@ -47,7 +67,7 @@ class Main extends PureComponent {
           <TopicList changeArticle={this.changeArticle} data={this.state.topicData} />
           <div className="right">
 
-            <ArticleList topicData={this.state.topicData} />
+            <ArticleList chosen = {this.state.chosenArticle} clicked = {this.state.clickedArticle} topicData={this.state.topicData} />
           </div>
         </div>
         <Footer />

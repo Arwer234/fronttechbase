@@ -5,22 +5,25 @@ import "./ArticleList.css"
 class ArticleList extends PureComponent {
     constructor(props) {
         super(props)
-
-        // var articles = []
-        // for (let i = 0; i < 4; i++) {
-        //     articles.push(<Article key = {i}/>);
-            
-        // }
-
-        // this.state = {
-        //     articles:articles
-        // }
+        this.state = {
+            chosen:this.props.chosen
+        }
     }
 
     render() {
-        let articleTab = this.props.topicData.map((item)=>{
-            return <Article key = {item.id} text = {item.content} />
-        })
+        console.log("rerender article")
+        var articleTab = []
+        if(!this.props.clicked){
+            articleTab = this.props.topicData.map((item)=>{
+                return <Article mode = "hidden" key = {item.id} text = {item.content} topic = {item.name}/>
+            })
+        }
+        else{
+            articleTab = this.props.topicData.map((item)=>{
+                if(item.name == this.props.chosen)  return <Article mode = "full" key = {item.id} text = {item.content} topic = {item.name}/>
+            })
+        }
+        
         return (
             <div className="article-list">
                 {articleTab}

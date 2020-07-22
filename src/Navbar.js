@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import "./Navbar.css"
+import SearchBar from "./SearchBar"
 
 class Navbar extends PureComponent {
     constructor(props) {
@@ -23,6 +24,7 @@ class Navbar extends PureComponent {
                         <a onClick = {this.props.fetchArticleData} href="#navbar">React Native</a>
                     </li>
                 </ul>
+                <SearchBar/>
             </div>
         )
     }
