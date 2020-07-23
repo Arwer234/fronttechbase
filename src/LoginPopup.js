@@ -16,12 +16,14 @@ class LoginPopup extends PureComponent {
 
         //logowanie ...
 
-        fetch('http://localhost:3001/login',{
+        fetch('http://localhost:3001/logout',{
             method: "POST",
             mode:"cors",
+            credentials:"include",
             body: JSON.stringify({username:this.state.username,password:this.state.password}),
             headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"http://localhost:3000"
             },
         }).then(
             (response) => (response.json())

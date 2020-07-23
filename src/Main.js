@@ -25,9 +25,11 @@ class Main extends PureComponent {
     await fetch('http://localhost:3001/getTopicData', {
       method: "POST",
       mode: "cors",
+      credentials:"include",
       body: JSON.stringify({ name: whichToFetch }),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin":"http://localhost:3000"
       },
     }).then(
       (response) => (response.json())
