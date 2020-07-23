@@ -26,7 +26,11 @@ class Header extends PureComponent {
     render() {
         return (
             <div className = "header">
-                <h1>Front Base App</h1>
+                <div className="headerlogo">
+                    <div className="logo"> </div>
+                    <h1>Front Base App</h1>
+                </div>
+                
                 <img src = "s" onClick={this.popupClick}/>
                 {this.state.showPopup? <LoginPopup popupClick={this.popupClick}/>:null}
                 

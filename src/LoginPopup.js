@@ -48,6 +48,7 @@ class LoginPopup extends PureComponent {
         return (
             <div className="login-popup">
                 <div className="login">
+                    <div className="close" onClick={this.props.popupClick}>X</div>
                     <h2>Log in</h2>
                     <h5>to admin page</h5>
                     <div className="inputs">
