@@ -5,6 +5,7 @@ import Navbar from "./Navbar"
 import TopicList from "./TopicList"
 import ArticleList from "./ArticleList"
 import Footer from "./Footer"
+import { Scrollbars } from 'react-custom-scrollbars';
 
 
 class Main extends PureComponent {
@@ -13,30 +14,41 @@ class Main extends PureComponent {
 
     this.state = {
       topicData: [],
-      clickedArticle:false,
-      chosenArticle:""
+      clickedArticle: false,
+      chosenArticle: ""
     }
     this.fetchArticleData = this.fetchArticleData.bind(this)
   }
   componentDidMount = () => {
     //this.fetchArticleData({ target: { innerHTML: "JavaScript" } })
+    this.updateWindowDimensions()
+    console.log(document.getElementsByClassName("header")[0].parentElement)
+    
+    document.getElementsByClassName("header")[0].parentElement.style.overflow = "visible"
+    document.getElementsByClassName("header")[0].parentElement.style.overflowY = "scroll"
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
   changeArticle = (item) => {
     this.resetArticleList()
     console.log(item.target.innerHTML)
-    if(!this.state.clickedArticle)
-    {
+    if (!this.state.clickedArticle) {
       this.setState({
-        clickedArticle:true,
-        chosenArticle:item.target.innerHTML
+        clickedArticle: true,
+        chosenArticle: item.target.innerHTML
       })
     }
   }
-  resetArticleList = () =>{
-    console.log(this.state.chosenArticle,this.state.clickedArticle)
+  resetArticleList = () => {
+    console.log(this.state.chosenArticle, this.state.clickedArticle)
     this.setState({
-      clickedArticle:false,
-      chosenArticle:""
+      clickedArticle: false,
+      chosenArticle: ""
     })
   }
   async fetchArticleData(item) {
@@ -61,17 +73,22 @@ class Main extends PureComponent {
   render() {
     return (
       <div className="root">
-        <Header />
-        <Navbar fetchArticleData={this.fetchArticleData} />
-        <div className="main">
-          <TopicList changeArticle={this.changeArticle} data={this.state.topicData} />
-          <div className="right">
+        <Scrollbars 
+          style={{ width: this.state.width, height: this.state.height}}
+          
+        >
+          <Header />
+          <Navbar fetchArticleData={this.fetchArticleData} />
+          <div className="main">
+            <TopicList changeArticle={this.changeArticle} data={this.state.topicData} />
+            <div className="right">
 
-            <ArticleList chosen = {this.state.chosenArticle} clicked = {this.state.clickedArticle} topicData={this.state.topicData} />
+              <ArticleList chosen={this.state.chosenArticle} clicked={this.state.clickedArticle} topicData={this.state.topicData} />
+            </div>
           </div>
-        </div>
-        <Footer />
-      </div>
+          <Footer />
+        </Scrollbars >
+      </div >
     )
   }
 }

@@ -19,12 +19,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#root{
+  overflow-x: hidden;
+}
+
 .root{
   display:flex;
   flex-direction: column;
-  height:100vh;
+  overflow-x: hidden;
 }
-
 .main{
   display: flex;
   flex-direction: row;
@@ -39,7 +42,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  min-height:75vh;
+  height:auto;
 }
 
 .header{
@@ -49,7 +53,8 @@
   height:8vh;
 }
 .main{
-  height:75vh;
+  min-height:75vh;
+  height:auto;
 }
 .footer{
   height:3vh;
