@@ -15,7 +15,7 @@ class ArticleList extends PureComponent {
         var articleTab = []
         if(!this.props.clicked){
             articleTab = this.props.topicData.map((item)=>{
-                return <Article mode = "hidden" key = {item.id} text = {item.content} topic = {item.name}/>
+                return <Article changeArticle={this.props.changeArticle} mode = "hidden" key = {item.id} text = {item.content} topic = {item.name}/>
             })
         }
         else{

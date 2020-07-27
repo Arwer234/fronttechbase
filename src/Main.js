@@ -20,23 +20,11 @@ class Main extends PureComponent {
     this.fetchArticleData = this.fetchArticleData.bind(this)
   }
   componentDidMount = () => {
-    //this.fetchArticleData({ target: { innerHTML: "JavaScript" } })
-    this.updateWindowDimensions()
-    console.log(document.getElementsByClassName("header")[0].parentElement)
-    
-    document.getElementsByClassName("header")[0].parentElement.style.overflow = "visible"
-    document.getElementsByClassName("header")[0].parentElement.style.overflowY = "scroll"
-    window.addEventListener('resize', this.updateWindowDimensions);
-  }
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
   }
   changeArticle = (item) => {
     this.resetArticleList()
-    console.log(item.target.innerHTML)
+    console.log(item.target)
+    item.target.classList.add("articleClicked")
     if (!this.state.clickedArticle) {
       this.setState({
         clickedArticle: true,
@@ -52,6 +40,7 @@ class Main extends PureComponent {
     })
   }
   async fetchArticleData(item) {
+    
     const whichToFetch = item.target.innerHTML
     this.resetArticleList()
     await fetch('http://localhost:3001/getTopicData', {
@@ -73,21 +62,17 @@ class Main extends PureComponent {
   render() {
     return (
       <div className="root">
-        <Scrollbars 
-          style={{ width: this.state.width, height: this.state.height}}
-          
-        >
           <Header />
           <Navbar fetchArticleData={this.fetchArticleData} />
           <div className="main">
             <TopicList changeArticle={this.changeArticle} data={this.state.topicData} />
             <div className="right">
 
-              <ArticleList chosen={this.state.chosenArticle} clicked={this.state.clickedArticle} topicData={this.state.topicData} />
+              <ArticleList changeArticle={this.changeArticle} chosen={this.state.chosenArticle} clicked={this.state.clickedArticle} topicData={this.state.topicData} />
             </div>
           </div>
           <Footer />
-        </Scrollbars >
+        
       </div >
     )
   }

@@ -31,6 +31,8 @@
 .main{
   display: flex;
   flex-direction: row;
+  min-height:75vh;
+  height:auto;
 }
 
 #topiclist{
@@ -51,10 +53,6 @@
 }
 #navbar{
   height:8vh;
-}
-.main{
-  min-height:75vh;
-  height:auto;
 }
 .footer{
   height:3vh;
