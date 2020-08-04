@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar"
 import "./Header.css"
 import LoginPopup from "./LoginPopup"
 import BigButton from './BigButton'
+import { Redirect } from 'react-router-dom'
 
 
 class Header extends PureComponent {
@@ -10,17 +11,23 @@ class Header extends PureComponent {
         super(props)
 
         this.state = {
-            showPopup:false
+            showPopup:false,
+            redirect:false,
         }
     }
 
-    popupClick= () => {
+    popupClick= (res) => {
 
         //if !sessionAdmin==false
 
         this.setState({
             showPopup:!this.state.showPopup
         })
+        if(res)
+        if(res.redirect){
+            this.setState({redirect:true})
+        }
+
     }
 
     render() {
@@ -33,7 +40,7 @@ class Header extends PureComponent {
                 
                 <img src = "s" onClick={this.popupClick}/>
                 {this.state.showPopup? <LoginPopup popupClick={this.popupClick}/>:null}
-                
+                {this.state.redirect ? <Redirect to="/admin"/>:null}
             </div>
         )
     }

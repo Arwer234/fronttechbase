@@ -2,13 +2,21 @@ import React, { PureComponent } from 'react'
 import BigButton from "./BigButton"
 import "./LoginPopup.css"
 
+
 class LoginPopup extends PureComponent {
     constructor(props) {
         super(props)
 
         this.state = {
             username:"",
-            password:""
+            password:"",
+        }
+    }
+
+    componentDidMount(){
+        let loggedIn = sessionStorage.getItem("loggedIn")
+        if(loggedIn){
+            this.props.popupClick({redirect:true});
         }
     }
 
@@ -21,21 +29,26 @@ class LoginPopup extends PureComponent {
             mode:"cors",
             body: JSON.stringify({username:this.state.username,password:this.state.password}),
             headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"http://localhost:3000"
             },
+            credentials:"include",
         }).then(
             (response) => (response.json())
         ).then((response)=>{
             console.log(response)
             
         if (response.status === 'success'){
-            alert("Message Sent."); 
-        }else if(response.status === 'fail'){
-            alert("Message failed to send.")
+            sessionStorage.setItem("loggedIn",true)
+            this.props.popupClick({redirect:true});
+            //this.props.popupClick()
+        }else if(response.status === 'failed'){
+            alert("Failed to login")
+            this.props.popupClick();
         }
         })
 
-        this.props.popupClick();
+        
     }
 
     inputChange = (ev)=>{
@@ -61,6 +74,7 @@ class LoginPopup extends PureComponent {
             </div> 
         )
     }
+
 }
 
 export default LoginPopup
