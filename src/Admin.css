@@ -1,0 +1,9 @@
+.actions{
+    background: #333333;
+    color:white;
+}
+.actions a{
+    color: white;
+    text-decoration: none;
+    padding-left: 20px;
+}

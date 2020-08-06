@@ -118,12 +118,42 @@ app.post("/login",function(req,res){
 })
 
 app.post("/authorize",function(req,res){ 
-    console.log(req.session)
     if(req.session.admin){
         res.send({authorized:true})
     }else{
         res.send({authorized:false})
     }
+})
+
+app.post("/addArticle", function(req,res){
+    if(req.session.admin){
+        let name = req.body.name
+        let cat = req.body.cat
+        let data = req.body.data
+        connection.connect(function(err){
+            connection.query(`INSERT INTO topics VALUES(null,'${name}','${cat}','${data}')`, function (err, rows, fields) {
+                if (err) throw err
+                res.send({status:success})
+            })
+        })
+        
+    }else{
+        res.send({authorized:false})
+    }
+})
+
+app.post("/getArticles",function(req,res){
+    connection.query(`SELECT * from topics`, function (err, rows, fields) {
+        if (err) throw err
+        else {
+            let dataToSend = []
+            for (let i = 0; i < rows.length; i++) {
+                dataToSend.push(rows[i])
+            }
+            res.send(JSON.stringify(dataToSend))
+        }
+
+    })
 })
 
 

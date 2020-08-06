@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Redirect } from 'react-router'
+import { Redirect, Router, Route, Switch } from 'react-router'
 import Header from "./Header"
+import "./Admin.css"
+import AdminAdd from "./AdminAdd"
+import AdminDelete from "./AdminDelete"
+import AdminEdit from "./AdminEdit"
 
 class Admin extends PureComponent {
     constructor(props) {
@@ -26,6 +30,7 @@ class Admin extends PureComponent {
         ).then((response)=>{
             console.log(response)
             if(!response.authorized){
+                sessionStorage.removeItem("loggedIn")
                 this.setState({redirect:true})
             }
         })
@@ -37,6 +42,25 @@ class Admin extends PureComponent {
             <div>
             {this.state.redirect ? <Redirect to="/"/>:null}
                 <Header/>
+                <div className="actions">
+                    <a href="/admin/add">Dodaj</a>
+                    <a href="/admin/delete">Usuń</a>
+                    <a href="/admin/edit">Edytuj</a>
+                </div>
+                <Switch>
+                    <Route path="/admin/add">
+                        <AdminAdd/>
+                    </Route>
+                    <Route path="/admin/delete">
+                        <AdminDelete/>
+                    </Route>
+                    <Route path="/admin/edit">
+                        <AdminEdit/>
+                    </Route>
+                    <Route path="/admin">
+                        <h2>Wybierz czynność</h2>
+                    </Route>
+                </Switch>
             </div>
         )
     }

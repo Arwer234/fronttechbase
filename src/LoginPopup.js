@@ -41,7 +41,6 @@ class LoginPopup extends PureComponent {
         if (response.status === 'success'){
             sessionStorage.setItem("loggedIn",true)
             this.props.popupClick({redirect:true});
-            //this.props.popupClick()
         }else if(response.status === 'failed'){
             alert("Failed to login")
             this.props.popupClick();
@@ -67,7 +66,7 @@ class LoginPopup extends PureComponent {
                     <div className="inputs">
                         <input placeholder="Login" value={this.state.username} onChange={this.inputChange} name="username"/>
                         <br/>
-                        <input placeholder="Password" value={this.state.password} onChange={this.inputChange} name="password"/>
+                        <input placeholder="Password" value={this.state.password} onChange={this.inputChange} name="password" type="password"/>
                     </div>
                     <BigButton text="Log in" onClick={this.logIn}/>
                 </div>
