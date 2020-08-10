@@ -128,13 +128,46 @@ app.post("/authorize",function(req,res){
 app.post("/addArticle", function(req,res){
     if(req.session.admin){
         let name = req.body.name
-        let cat = req.body.cat
+        let cat = req.body.category
         let data = req.body.data
-        connection.connect(function(err){
-            connection.query(`INSERT INTO topics VALUES(null,'${name}','${cat}','${data}')`, function (err, rows, fields) {
-                if (err) throw err
-                res.send({status:success})
-            })
+        var sql = `INSERT INTO topics(name, belongs_to, content) VALUES('${name}','${cat}','${data}')`
+        
+        connection.query(sql, function (err, result) {
+            if (err)  throw ( err )
+            res.send({status:'success'})
+        })
+        
+    }else{
+        res.send({authorized:false})
+    }
+})
+
+app.post("/deleteArticle", function(req,res){
+    if(req.session.admin){
+        let name = req.body.name
+        var sql = `DELETE FROM topics WHERE name='${name}'`
+        
+        connection.query(sql, function (err, result) {
+            if (err) throw ( err )
+            res.send({status:'success'})
+        })
+        
+    }else{
+        res.send({authorized:false})
+    }
+})
+
+app.post("/updateArticle", function(req,res){
+    if(req.session.admin){
+        let id = req.body.id
+        let name = req.body.name
+        let cat = req.body.category
+        let data = req.body.data
+        var sql = `UPDATE topics SET name='${name}', belongs_to='${cat}', content='${data}' WHERE id='${id}'`
+        
+        connection.query(sql, function (err, result) {
+            if (err) throw ( err )
+            res.send({status:'success'})
         })
         
     }else{

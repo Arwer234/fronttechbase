@@ -6,8 +6,39 @@ class AdminAdd extends PureComponent {
         super(props)
 
         this.state = {
-            
+            name:"",
+            category:"JavaScript",
+            value:""
         }
+    }
+
+    inputChange = (ev)=>{
+        this.setState({
+            [ev.target.name]: ev.target.value
+        })
+    }
+
+    addArticle = ()=>{
+        fetch('http://localhost:3001/addArticle',{
+            method: "POST",
+            mode:"cors",
+            body: JSON.stringify({name:this.state.name ,category:this.state.category ,data:this.state.value }),
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin":"http://localhost:3000"
+                },
+                credentials:"include",
+        }).then(
+            (response) => (response.json())
+        ).then((response)=>{
+            if(response.status==="success"){
+                this.setState({
+                    name:"",
+                    category:"JavaScript",
+                    value:""
+                })
+            }
+        })
     }
 
     render() {
@@ -16,9 +47,9 @@ class AdminAdd extends PureComponent {
                 <h2>Dodaj nowy artykuł</h2>
 
                 <div>
-                    <input placeholder="Name"/>
+                    <input placeholder="Name" name="name" onChange={this.inputChange} value={this.state.name}/>
                     Kategoria
-                    <select>
+                    <select name="category" onChange={this.inputChange}>
                         <option>
                             JavaScript
                         </option>
@@ -29,15 +60,15 @@ class AdminAdd extends PureComponent {
                             React
                         </option>
                         <option>
-                            ReactNative
+                            React Native
                         </option>
                     </select>
 
-                    <textarea rows="20" cols="150">
+                    <textarea rows="20" cols="150" name="value" onChange={this.inputChange} value={this.state.value}>
 
                     </textarea>
 
-                    <button>Dodaj</button>
+                    <button onClick={this.addArticle}>Dodaj</button>
                 </div>
             </div>
         )

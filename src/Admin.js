@@ -16,7 +16,7 @@ class Admin extends PureComponent {
     }
 
     componentDidMount(){
-        fetch(fetch('http://localhost:3001/authorize',{
+            fetch('http://localhost:3001/authorize',{
             method: "POST",
             mode:"cors",
             body: JSON.stringify({username:this.state.username,password:this.state.password}),
@@ -34,7 +34,6 @@ class Admin extends PureComponent {
                 this.setState({redirect:true})
             }
         })
-    )
     }
 
     render() {
